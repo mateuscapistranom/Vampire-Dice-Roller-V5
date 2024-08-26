@@ -18,60 +18,56 @@ document.addEventListener('DOMContentLoaded', () => {
 
     let isEnglish = false;
 
-    rollButton.addEventListener('click', () => {
-        const diceCount = Math.min(Math.max(parseInt(diceCountInput.value, 10), 1), 10);
-        const hungerDice = Math.min(Math.max(parseInt(hungerDiceInput.value, 10), 0), 10);
-        const difficulty = Math.min(Math.max(parseInt(difficultyInput.value, 10), 1), 10);
-
-        const results = rollDice(diceCount, hungerDice, difficulty);
-        displayResults(results);
-    });
-
-    languageToggle.addEventListener('click', () => {
-        isEnglish = !isEnglish;
-        updateLanguage();
-    });
-
-    function rollDice(diceCount, hungerDice, difficulty) {
-        const results = {
-            success: 0,
-            failure: 0,
-            hunger: 0,
-            values: []
-        };
-
-        for (let i = 0; i < diceCount; i++) {
-            const roll = Math.floor(Math.random() * 10) + 1; // Rolagem de 1 a 10
-            if (roll === 1) {
-                results.hunger++;
-                results.values.push(roll);
-            } else if (roll <= difficulty) {
-                results.success++;
-                results.values.push(roll);
-            } else {
-                results.failure++;
-                results.values.push(roll);
-            }
-        }
-
-        for (let i = 0; i < hungerDice; i++) {
-            const roll = 1; // Sempre será fome
-            results.hunger++;
-            results.values.push(roll);
-        }
-
-        return results;
+    function rollDie() {
+        return Math.floor(Math.random() * 10) + 1;
     }
 
-    function displayResults(results) {
-        diceResultsDiv.innerHTML = results.values.map(value => {
-            const className = value === 1 ? 'hunger' : value <= difficultyInput.value ? 'success' : 'failure';
-            return `<span class="die ${className}">${value}</span>`;
-        }).join('');
+    function rollDice() {
+        const diceCount = parseInt(diceCountInput.value, 10);
+        const hungerDiceCount = parseInt(hungerDiceInput.value, 10);
+        const difficulty = parseInt(difficultyInput.value, 10);
 
-        successCountSpan.textContent = results.success;
-        failureCountSpan.textContent = results.failure;
-        hungerCountSpan.textContent = results.hunger;
+        diceResultsDiv.innerHTML = '';
+        successCountSpan.textContent = '0';
+        failureCountSpan.textContent = '0';
+        hungerCountSpan.textContent = '0';
+
+        let successCount = 0;
+        let failureCount = 0;
+        let hungerCount = 0;
+
+        for (let i = 0; i < diceCount; i++) {
+            const result = rollDie();
+            const dieElement = document.createElement('span');
+            dieElement.className = 'die';
+
+            if (result === 1) {
+                dieElement.classList.add('hunger');
+                hungerCount++;
+            } else if (result >= difficulty) {
+                dieElement.classList.add('success');
+                successCount++;
+            } else {
+                dieElement.classList.add('failure');
+                failureCount++;
+            }
+
+            dieElement.textContent = result;
+            diceResultsDiv.appendChild(dieElement);
+        }
+
+        for (let i = 0; i < hungerDiceCount; i++) {
+            const result = rollDie();
+            const dieElement = document.createElement('span');
+            dieElement.className = 'die hunger';
+            dieElement.textContent = result;
+            diceResultsDiv.appendChild(dieElement);
+            hungerCount++;
+        }
+
+        successCountSpan.textContent = successCount;
+        failureCountSpan.textContent = failureCount;
+        hungerCountSpan.textContent = hungerCount;
     }
 
     function updateLanguage() {
@@ -82,9 +78,9 @@ document.addEventListener('DOMContentLoaded', () => {
             rollButton.textContent = 'Roll Dice';
             languageToggle.textContent = 'Switch to Portuguese';
 
-            ruleSuccess.innerHTML = '<strong>Success Dice:</strong> Dice rolls that are equal to or less than the specified difficulty.';
-            ruleFailure.innerHTML = '<strong>Failure Dice:</strong> Dice rolls that are greater than the difficulty and are not hunger dice.';
-            ruleHunger.innerHTML = '<strong>Hunger Dice:</strong> Dice that show a 1.';
+            ruleSuccess.innerHTML = '<strong>Success Dice:</strong> Dice rolls that are equal to or greater than the specified difficulty, with a 10 always being a success.';
+            ruleFailure.innerHTML = '<strong>Failure Dice:</strong> Dice rolls that are less than the difficulty.';
+            ruleHunger.innerHTML = '<strong>Hunger Dice:</strong> Dice that are part of your Hunger pool.';
         } else {
             title.textContent = 'Vampire Dice Roller V5';
             resultsTitle.textContent = 'Resultados';
@@ -92,9 +88,15 @@ document.addEventListener('DOMContentLoaded', () => {
             rollButton.textContent = 'Rolar Dados';
             languageToggle.textContent = 'Switch to English';
 
-            ruleSuccess.innerHTML = '<strong>Dados de Sucesso:</strong> Dados cuja rolagem é menor ou igual à dificuldade especificada.';
-            ruleFailure.innerHTML = '<strong>Dados de Falha:</strong> Dados cuja rolagem é maior que a dificuldade e não são dados de fome.';
+            ruleSuccess.innerHTML = '<strong>Dados de Sucesso:</strong> Dados cuja rolagem é igual ou maior que a dificuldade especificada, sendo que um 10 é sempre sucesso.';
+            ruleFailure.innerHTML = '<strong>Dados de Falha:</strong> Dados cuja rolagem é menor que a dificuldade.';
             ruleHunger.innerHTML = '<strong>Dados de Fome:</strong> Dados que mostram o número 1.';
         }
     }
+
+    rollButton.addEventListener('click', rollDice);
+    languageToggle.addEventListener('click', () => {
+        isEnglish = !isEnglish;
+        updateLanguage();
+    });
 });

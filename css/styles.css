@@ -53,7 +53,6 @@ button.switch {
     position: absolute;
     top: 20px;
     right: 20px;
-    aria-label: "Change language"; /* Atributo aria para acessibilidade */
 }
 
 button.switch:hover {
@@ -69,7 +68,6 @@ button {
     padding: 10px 20px;
     cursor: pointer;
     font-size: 1em;
-    aria-label: "Perform action"; /* Atributo aria para acessibilidade */
 }
 
 button:hover {
@@ -87,7 +85,6 @@ input[type="number"] {
     background-color: #fff;
     color: #000;
     text-align: center;
-    aria-label: "Enter number"; /* Atributo aria para acessibilidade */
 }
 
 input[type="number"]::-webkit-inner-spin-button,
@@ -132,9 +129,9 @@ section {
     font-weight: bold;
     position: relative;
     color: #1d0000; /* Cor dos números no dado */
+    transition: transform 0.3s ease; /* Adicionando transição para animação */
 }
 
-/* Cores dos dados */
 .die.success {
     background-color: #4caf50; /* Verde para sucesso */
 }
@@ -182,34 +179,26 @@ footer {
     bottom: 0;
     width: 100%;
     text-align: center;
-    padding: 10px;
+    color: #ccc;
     font-size: 0.9em;
-    color: #1d0000; /* Cor do texto do rodapé */
-    background: transparent; /* Fundo transparente */
+    margin-top: 40px;
 }
 
-/* Responsividade */
-@media (max-width: 600px) {
-    .container {
-        padding: 10px;
-    }
+footer p {
+    margin: 0;
+}
 
-    input[type="number"] {
-        width: 50px;
-        font-size: 0.9em;
-    }
-
-    #title {
-        font-size: 1.8em;
-    }
-
-    button {
-        padding: 8px 15px;
-    }
-
-    .die {
-        width: 40px;
-        height: 40px;
-        line-height: 40px;
-    }
+/* Alertas */
+.alert {
+    position: fixed;
+    top: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    background-color: #f44336;
+    color: #fff;
+    padding: 15px;
+    border-radius: 5px;
+    font-size: 1.2em;
+    z-index: 1000;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
 }
