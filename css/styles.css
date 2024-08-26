@@ -1,0 +1,215 @@
+/* Geral */
+body {
+    font-family: 'Arial', sans-serif;
+    color: #fff;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+    background-color: #1d0000; /* Cor de fundo caso a imagem não carregue */
+    background-image: url('../assets/vtm5.jpg'); /* Caminho da imagem de fundo */
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+}
+
+/* Container principal */
+.container {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    padding: 20px;
+    background: rgba(0, 0, 0, 0.6); /* Fundo semitransparente para melhorar a legibilidade */
+    border-radius: 10px;
+    position: relative;
+}
+
+/* Cabeçalho */
+header {
+    margin-bottom: 60px; /* Espaço ajustado para o botão e rodapé */
+    position: relative;
+}
+
+/* Título */
+#title {
+    font-size: 2.5em;
+    margin: 0;
+}
+
+/* Botão Switch */
+button.switch {
+    background-color: #333;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    padding: 12px 24px;
+    cursor: pointer;
+    font-size: 1.2em;
+    margin-top: 20px; /* Espaço acima do botão */
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    aria-label: "Change language"; /* Atributo aria para acessibilidade */
+}
+
+button.switch:hover {
+    background-color: #555;
+}
+
+/* Botões */
+button {
+    background-color: #333;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    padding: 10px 20px;
+    cursor: pointer;
+    font-size: 1em;
+    aria-label: "Perform action"; /* Atributo aria para acessibilidade */
+}
+
+button:hover {
+    background-color: #555;
+}
+
+/* Inputs numéricos */
+input[type="number"] {
+    width: 60px;
+    padding: 5px;
+    margin: 15px;
+    font-size: 1em;
+    border-radius: 5px;
+    border: 1px solid #333;
+    background-color: #fff;
+    color: #000;
+    text-align: center;
+    aria-label: "Enter number"; /* Atributo aria para acessibilidade */
+}
+
+input[type="number"]::-webkit-inner-spin-button,
+input[type="number"]::-webkit-outer-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+
+input[type="number"] {
+    max-width: 60px;
+}
+
+/* Seções */
+section {
+    margin: 20px 0;
+}
+
+/* Seção de resultados */
+.results-section {
+    margin-top: 20px;
+}
+
+/* Resultados dos dados */
+#dice-results {
+    margin: 20px 0;
+    font-size: 1.2em;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+/* Estilo dos dados */
+.die {
+    display: inline-block;
+    width: 50px;
+    height: 50px;
+    line-height: 50px;
+    text-align: center;
+    border-radius: 5px;
+    margin: 10px;
+    font-size: 1.2em;
+    font-weight: bold;
+    position: relative;
+    color: #1d0000; /* Cor dos números no dado */
+}
+
+/* Cores dos dados */
+.die.success {
+    background-color: #4caf50; /* Verde para sucesso */
+}
+
+.die.failure {
+    background-color: #f44336; /* Vermelho para falha */
+}
+
+.die.hunger {
+    background-color: #ffb74d; /* Amarelo mais suave para fome */
+}
+
+/* Seção de regras */
+.rules-section {
+    margin: 30px 0;
+    font-size: 1em;
+    text-align: left;
+}
+
+/* Legenda de cores */
+.color-legend {
+    display: flex;
+    justify-content: center;
+    margin: 20px 0;
+    font-size: 1em;
+    color: #fff;
+}
+
+.color-legend div {
+    margin: 0 15px;
+    text-align: center;
+}
+
+.color-legend .color-box {
+    width: 30px;
+    height: 30px;
+    border-radius: 5px;
+    display: inline-block;
+    margin-bottom: 5px;
+}
+
+/* Rodapé */
+footer {
+    position: relative;
+    bottom: 0;
+    width: 100%;
+    text-align: center;
+    padding: 10px;
+    font-size: 0.9em;
+    color: #1d0000; /* Cor do texto do rodapé */
+    background: transparent; /* Fundo transparente */
+}
+
+/* Responsividade */
+@media (max-width: 600px) {
+    .container {
+        padding: 10px;
+    }
+
+    input[type="number"] {
+        width: 50px;
+        font-size: 0.9em;
+    }
+
+    #title {
+        font-size: 1.8em;
+    }
+
+    button {
+        padding: 8px 15px;
+    }
+
+    .die {
+        width: 40px;
+        height: 40px;
+        line-height: 40px;
+    }
+}

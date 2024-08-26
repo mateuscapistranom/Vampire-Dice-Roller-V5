@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vampire Dice Roller V5</title>
+    <meta name="description" content="Rode dados para Vampire: A Máscara 5ª edição com facilidade. Personalize a quantidade de dados, a dificuldade e os dados de fome. Veja resultados claros e compreenda as regras de rolagem.">
+    <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1 id="title">Vampire Dice Roller V5</h1>
+            <button id="language-toggle">Switch to English</button>
+        </header>
+        <main>
+            <section>
+                <label for="dice-count">Número de Dados:</label>
+                <input type="number" id="dice-count" min="1" max="10" aria-label="Número de dados" value="1">
+                
+                <label for="hunger-dice">Dados de Fome:</label>
+                <input type="number" id="hunger-dice" min="0" max="10" aria-label="Número de dados de fome" value="0">
+                
+                <label for="difficulty">Dificuldade:</label>
+                <input type="number" id="difficulty" min="1" max="10" aria-label="Dificuldade" value="6">
+                
+                <button id="roll-button" aria-label="Rolar dados">Rolar Dados</button>
+            </section>
+
+            <section class="results-section">
+                <h2 id="results-title">Resultados</h2>
+                <div id="dice-results" aria-live="polite"></div>
+                <div id="result-summary">
+                    <p id="success-count">Sucessos: <span aria-live="polite">0</span></p>
+                    <p id="failure-count">Falhas: <span aria-live="polite">0</span></p>
+                    <p id="hunger-count">Dados de Fome: <span aria-live="polite">0</span></p>
+                </div>
+            </section>
+
+            <section class="rules-section">
+                <h2 id="rules-title">Regras de Rolagem:</h2>
+                <p id="rule-success"><strong>Dados de Sucesso:</strong> Dados cuja rolagem é menor ou igual à dificuldade especificada.</p>
+                <p id="rule-failure"><strong>Dados de Falha:</strong> Dados cuja rolagem é maior que a dificuldade e não são dados de fome.</p>
+                <p id="rule-hunger"><strong>Dados de Fome:</strong> Dados que mostram o número 1.</p>
+                <p><strong>Cor dos Dados:</strong></p>
+                <ul>
+                    <li><span class="die success"></span>Verde: Sucesso</li>
+                    <li><span class="die failure"></span>Vermelho: Falha</li>
+                    <li><span class="die hunger"></span>Laranja Escuro: Fome</li>
+                </ul>
+            </section>
+        </main>
+        <footer>
+            <p>&copy; 2024 - <span id="footer-symbol"> © ᛖ △ 𝐿 𝐾 𝑉</span></p>
+        </footer>
+    </div>
+    <script src="js/scripts.js"></script>
+</body>
+</html>
